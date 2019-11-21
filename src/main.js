@@ -5,10 +5,15 @@ import App from './App'
 import router from './router'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import http from './http.js'
+import { Modal } from 'iview'
 Vue.config.productionTip = false
 Vue.use(iView);
+Vue.use(ElementUI);
 Vue.prototype.http=http;
+Vue.prototype.$Modal=Modal;
 
 /* eslint-disable no-new */
 new Vue({

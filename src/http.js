@@ -10,6 +10,7 @@ let service = axios.create({
 export default{
     //get请求
     get(url,param){
+        console.log(param);
         return new Promise((callback,reject)=>{
             service({
                 method:"get",
