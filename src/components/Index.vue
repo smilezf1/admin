@@ -1,5 +1,5 @@
 <template>
-  <div class="Index layout" :class="{'layout-hide-text':spanLeft<3}">
+  <!-- <div class="Index layout" :class="{'layout-hide-text':spanLeft<3}">
     <Row type="flex">
       <i-col :span="spanLeft" class="layout-menu-left">
         <Menu active-key="1" theme="dark" width="auto">
@@ -26,22 +26,32 @@
         </div>
       </i-col>
     </Row>
+  </div>-->
+  <div class="Index">
+    <Left />
+    <div class="right">
+      <div class="nav">
+        <Head />
+      </div>
+      <div class="main">
+        <Classify />
+      </div>
+    </div>
   </div>
 </template>
 <script>
-import Classify from '@/components/Classify.vue'
+import Classify from "@/components/Classify.vue";
+import Left from "@/components/Left.vue";
+import Head from "@/components/Head.vue";
 export default {
+  name: "Index",
   data() {
     return {
-      spanLeft:3,
-      spanRight:21
+      spanLeft: 3,
+      spanRight: 21
     };
   },
-  computed: {
-    iconSize() {
-      return this.spanLeft === 3 ? 14 : 24;
-    }
-  },
+  computed: {},
   methods: {
     toggleClick() {
       if (this.spanLeft == 3) {
@@ -53,63 +63,57 @@ export default {
       }
     }
   },
-  components:{Classify}
+  components: { Classify, Left, Head }
 };
 </script>
 <style>
-.layout {
+.Index {
   height: 100%;
-  border: 1px solid #d7dde4;
-  background: #f5f7f9;
-  position: relative;
-  border-radius: 4px;
-  overflow:auto;
+  box-sizing: border-box;
 }
-.ivu-row-flex {
+.Index .nav {
+  width: 87%;
+  height: 65px;
+  position: absolute;
+  top: 0;
+  left: 250px;
+}
+.right {
+  width: 86%;
   height: 100%;
+  margin: 10px 0 0 10px;
+  float: left;
+  background: white !important;
 }
-.layout-header{
-  background:white;
-  box-shadow: 0 1px 1px rgba(0,0,0,.1)
+.main {
+  width: 86%;
+  height: 100%;
+  overflow: auto;
+  position: absolute;
+  margin-top:56px;
 }
-.layout-content {
-  margin: 15px;
-  overflow: hidden;
-  background: #fff;
-  border-radius: 4px;
-  height:100%;
-}
-.layout-content-main {
-  padding: 10px;
-  height:100%;
-  overflow:auto;
-}
-.layout-menu-left {
-  background: #464c5b;
-}
-.layout-content-header {
-  height: 60px;
-  background: #fff;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+.layout-header {
+  background: white;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 .ivu-btn-text:hover {
-   color:none !important;
-   
-    border-color: transparent;
-    }
-.ivu-menu-dark{
-  background:none;
+  color: none !important;
+
+  border-color: transparent;
+}
+.ivu-menu-dark {
+  background: none;
 }
 .layout-logo-left {
   width: 90%;
   border-radius: 3px;
   margin: 15px auto;
-  color:white;
-  display:flex;
-  align-items:center;
+  color: white;
+  display: flex;
+  align-items: center;
 }
-.layout-logo-left span{
- margin-left:10px;
+.layout-logo-left span {
+  margin-left: 10px;
 }
 .layout-ceiling-main a {
   color: #9ba7b5;

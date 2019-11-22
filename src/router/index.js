@@ -5,6 +5,8 @@ import Index from '@/components/Index.vue';
 import ClassifyEdit from '@/components/ClassifyEdit.vue'
 import aa from "@/components/aa.vue";
 import Left from '@/components/Left.vue'
+import CompanyDetail from '@/components/CompanyDetail'
+import Classify from '@/components/Classify'
 Vue.use(Router)
 export default new Router({
   routes: [{
@@ -30,6 +32,15 @@ export default new Router({
   {
     path:"/Left",
     component:Left
+  },
+  {
+    path:"/CompanyDetail",
+    name:"CompanyDetail",
+    component:CompanyDetail
+  },
+  {
+    path:"/Classify",
+    component:Classify
   }
 
 ]
