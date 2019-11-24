@@ -18,9 +18,10 @@
             <el-form-item label="图片" :label-width="formLabelWidth">
               <el-upload
                 class="upload-demo"
-                action="https://jsonplaceholder.typicode.com/posts/"
+                action="https://www.51gso.com/arvato/app/arvato_shop_api.php?i=194&r=amouse.index.images"
                 :on-preview="handlePreview"
                 :on-remove="handleRemove"
+                :on-success="xx"
                 list-type="picture"
                 :auto-upload="false"
                 :limit="1"
@@ -129,16 +130,17 @@ export default {
     };
   },
   beforeMount() {
-    this.http.get("amouse.index.getFlList").then(res => {
+     this.http.get("amouse.index.getFlList").then(res => {
+       console.log(res.list);
       this.listItem = res.list;
-    });
+     });
     this.http
       .get("amouse.index.images", {
         file:
-          "http://ttcdn-image-shanghai.widiazine.com/images/194/2016/11/B2V2SYbCYiNiZSV2nyAa22BsaqV2q2.jpg"
+          ""
       })
       .then(res => {
-        console.log(res,"图片上传");
+        // console.log(res,"图片上传");
       });
   },
   mounted() {},
@@ -188,12 +190,16 @@ export default {
       this.dialogFormEditVisible = true;
     },
     detail(id) {
+      console.log(id);
       this.dialogTableVisible = true;
       this.http
-        .get("amouse.index.amouseContacts", { pcateid: id })
+        .get("amouse.index.amouseContacts", { pcateid:id })
         .then(res => {
           this.companyItem = res.list;
-        });
+          console.log(res);
+        }).catch(err=>{
+          console.log(err);
+        })
     },
     companyDetail() {
       this.$router.push({ path: "Login" });
@@ -205,6 +211,11 @@ export default {
     handlePreview(file) {
       console.log(file, fileList);
     },
+   xx(response,file,fileList){
+     console.log(response,file,FileList);
+
+   },    
+
     //删除
     delete1() {
       this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {

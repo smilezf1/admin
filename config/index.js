@@ -1,16 +1,20 @@
 'use strict'
-// Template version: 1.3.1
-// see http://vuejs-templates.github.io/webpack for documentation.
-
 const path = require('path')
-
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/api':{
+        target: "https://www.51gso.com/arvato/app/arvato_shop_api.php?i=194&r=",
+        changeOrigin:true,
+        pathRewrite:{
+            '^/api':''
+        }
+      }
+    
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

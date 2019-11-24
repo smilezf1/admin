@@ -16,12 +16,14 @@ export default {
   padding: 0;
 }
 #app {
+  width:100%;
   height: 100%;
+  overflow: hidden;
 }
 body {
-  height: 100vh;
+  width:100%;
+  height:100vh;
   background: #f3f3f3;
-  overflow-x: hidden;
-  overflow-y:auto;
+  overflow: hidden;
 }
 </style>

@@ -16,9 +16,8 @@ import VueUeditorWrap from 'vue-ueditor-wrap'
 Vue.config.productionTip = false
 Vue.use(iView);
 Vue.use(ElementUI);
-Vue.prototype.http = http;
+ Vue.prototype.http = http;
 Vue.prototype.$Modal = Modal;
-
 /* eslint-disable no-new */
 Vue.component('vue-ueditor-wrap', VueUeditorWrap)
 new Vue({

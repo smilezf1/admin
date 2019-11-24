@@ -1,37 +1,5 @@
 <template>
   <div class="Login">
-    <!-- <form class="login" @submit.prevent="submit($event)">
-      <div class="login-top">欢迎登录</div>
-      <div class="login-bottom">
-        <label>
-          <span>管理员：</span>
-          <input type="text" value="" v-model="userName" class="text" />
-        </label>
-        <label>
-          <span>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</span>
-          <input type="password" value="" v-model="passWord" class="pwd" />
-        </label>
-        <label>
-          <button @click="submitForm($event)">登录</button>
-        </label>
-      </div>
-    </form>-->
-    <!-- <i-form v-ref:from-inline :model="formInline" :rules="ruleInline" inline class="login">
-      <div class="login-top">欢迎登录</div>
-      <div class="login-content">
-        <Form-item prop="user" style="width:100%">
-          <i-input type="text" placeholder="UserName">
-            <Icon type="ios-person" slot="prepend"></Icon>
-          </i-input>
-        </Form-item>
-        <Form-item prop="password" style="width:100%">
-          <i-input type="password" placeholder="Password">
-            <Icon type="md-lock" slot="prepend"></Icon>
-          </i-input>
-        </Form-item>
-        <i-button type="primary"  @click="handleSubmit('formIline')">登录</i-button>
-      </div>
-    </i-form>-->
     <div class="formcard">
       <div>后台管理系统</div>
       <div>
@@ -93,7 +61,6 @@ export default {
     handleSubmit(name) {
       const _this = this;
       let model = this.$refs.loginForm.$options.propsData.model;
-      console.log(model);
       this.$refs[name].validate(valid => {
         if (valid) {
           this.http
@@ -102,7 +69,6 @@ export default {
               pw: md5(model.password)
             })
             .then(res => {
-              console.log(res.error);
               if (res.error == 0) {
                 this.$Message.success("登录成功");
                 setTimeout(function() {

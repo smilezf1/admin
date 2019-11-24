@@ -1,32 +1,4 @@
 <template>
-  <!-- <div class="Index layout" :class="{'layout-hide-text':spanLeft<3}">
-    <Row type="flex">
-      <i-col :span="spanLeft" class="layout-menu-left">
-        <Menu active-key="1" theme="dark" width="auto">
-          <div class="layout-logo-left">
-            <img src="../../static/images/logo.jpg" style="width:70px;">
-            <span>黄页上海</span>
-          </div>
-          <Menu-item key="1">
-            <Icon type="ios-keypad" :size="iconSize"></Icon>
-            <span class="layout-text">公司分类</span>
-          </Menu-item>
-        </Menu>
-      </i-col>
-      <i-col :span="spanRight">
-        <div class="layout-header">
-          <i-button type="text" @click="toggleClick">
-           <Icon type="ios-more" :size="32"></Icon>
-          </i-button>
-        </div>
-        <div class="layout-content">
-          <div class="layout-content-main">
-            <Classify/>
-          </div>
-        </div>
-      </i-col>
-    </Row>
-  </div>-->
   <div class="Index">
     <Left />
     <div class="right">

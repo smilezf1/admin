@@ -7,12 +7,17 @@ import aa from "@/components/aa.vue";
 import Left from '@/components/Left.vue'
 import CompanyDetail from '@/components/CompanyDetail'
 import Classify from '@/components/Classify'
+import register from '@/components/register.vue';
+import Header from '@/components/common/Header.vue';//新增
+import slideBar from '@/components/common/slideBar.vue';
+import Home from '@/components/common/Home.vue';
 Vue.use(Router)
+
 export default new Router({
   routes: [{
     path: '/',
-    name: 'Login',
-    component: Login
+    name: 'register',
+    component:register
   },
   {
     path: "/Index",
@@ -41,7 +46,22 @@ export default new Router({
   {
     path:"/Classify",
     component:Classify
+  },
+  {
+    path:'/register',
+    component:register
+  },
+  {
+    path:"/Header",
+    component:Header
+  },
+  {
+    path:"/slideBar",
+    component:slideBar
+  },
+  {
+    path:"/Home",
+    component:Home
   }
-
 ]
 })
