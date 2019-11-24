@@ -65,22 +65,10 @@ export default {
                 this.$Message.error("用户名或密码错误");
               }
             });
-        }else{
-          this.$Message.error("请填写用户名和密码")
+        } else {
+          this.$Message.error("请填写用户名和密码");
         }
       });
-
-      //   this.$refs.login.validate(valid => {
-      //     if (valid) {
-      //       this.$message.success("登录成功");
-      //       localStorage.setItem("ms_username", this.login.username);
-      //       this.$router.push("/");
-      //     } else {
-      //       this.$message.error("请输入账号和密码");
-      //       console.log("error submit!!");
-      //       return false;
-      //     }
-      //   });
     }
   }
 };

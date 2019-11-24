@@ -71,7 +71,7 @@
         <!-- 删除弹窗 -->
       </div>
       <div class="con-table">
-        <el-table :data="listItem" style="width:100%">
+        <el-table :data="listItem" style="width:100%;margin-left:15px">
           <el-table-column prop="id" label="分类ID" width="180">
             <template slot-scope="scope">
               <span>{{scope.row.id}}</span>

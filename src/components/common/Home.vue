@@ -9,7 +9,7 @@
             <router-view></router-view>
           </keep-alive>
         </transition>
-          <Classify/>
+          <!-- <Classify/> -->
         <el-backtop target=".content">
         </el-backtop>
       </div>

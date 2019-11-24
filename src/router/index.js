@@ -14,7 +14,17 @@ import Home from '@/components/common/Home.vue';
 Vue.use(Router)
 
 export default new Router({
-  routes: [{
+  routes: [
+    {
+      path:"/",
+      component:Home,
+      children:[
+        {
+          path:"tt",
+          component:()=>import ('@/components/tt.vue')
+        }
+      ]
+    },{
     path: '/',
     name: 'register',
     component:register
@@ -59,9 +69,5 @@ export default new Router({
     path:"/slideBar",
     component:slideBar
   },
-  {
-    path:"/Home",
-    component:Home
-  }
 ]
 })
