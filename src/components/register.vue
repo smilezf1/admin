@@ -56,7 +56,6 @@ export default {
               pw: md5(model.password)
             })
             .then(res => {
-              console.log(res.err);
               if (res.error == 0) {
                 this.$Message.success("登录成功");
                 this.$router.push("/Home");

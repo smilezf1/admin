@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    <input type="file" name="file">
+  </div>
 </template>
 <script>
 import { Modal } from "iview";

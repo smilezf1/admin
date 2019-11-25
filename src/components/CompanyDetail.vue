@@ -1,53 +1,73 @@
 <template>
   <div class="CompanyDetail">
-    <Left />
-    <div class="right">
-      <div class="nav">
-        <Head />
-      </div>
-      <div class="main">
-        <h2 class="title">
-          公司名称
-          <i-input style="width:200px;margin-left:10px" v-model="listItem.title"></i-input>
+    <div class="main">
+      <!-- <h2 class="title">
+          <p>公司名称</p>
+          <el-input style="width:400px;margin-left:10px" v-model="listItem.title"></el-input>
         </h2>
+        <p class="detail">公司详情</p>
         <vue-ueditor-wrap v-model="listItem.info"></vue-ueditor-wrap>
-      </div>
+        <p class="phone">联系电话:
+          <el-input v-model="listItem.mobile1" style="width:400px;margin-top:10px;"></el-input>
+        </p>
+        <p class="address">联系地址:
+          <el-input v-model="listItem.place" style="min-width:400px;max-width:500px"></el-input>
+        </p>
+        <p class="images">
+          图片
+      </p>-->
+      <el-form :model="listItem">
+        <el-form-item label="公司名称" :label-width="formLabelWidth">
+          <el-input v-model="listItem.title"></el-input>
+        </el-form-item>
+        <el-form-item label="公司详情" :label-width="formLabelWidth">
+         <vue-ueditor-wrap v-model="listItem.info" style="margin-top:40px;"></vue-ueditor-wrap>
+        </el-form-item>
+        <el-form-item label="联系电话" :label-width="formLabelWidth">
+          <el-input v-model="listItem.mobile1"></el-input>
+        </el-form-item>
+        <el-form-item label="联系地址" :label-width="formLabelWidth">
+          <el-input v-model="listItem.place"></el-input>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
 <script>
-import Head from "@/components/Head.vue";
-import Left from "@/components/Left.vue";
 export default {
   name: "CompanyDetail",
   data() {
     return {
-      msg:
-        '<h2><img src="http://img.baidu.com/hi/jx2/j_0003.gif"/>Vue + UEditor + v-model双向绑定</h2>',
       myConfig: {
-         autoHeightEnabled:true,
+        autoHeightEnabled: true,
         // 初始容器高度
         initialFrameHeight: 240,
         // 初始容器宽度
         initialFrameWidth: "60%"
       },
-      listItem:{}
+      listItem: {},
+      form: [],
+      formLabelWidth: "40px"
     };
   },
-  mounted(){
-    let id=this.$route.params.id;
-    this.http.get("amouse.index.getDetail",{id}).then(res=>{
+  mounted() {
+    let id = this.$route.params.id;
+    this.http.get("amouse.index.getDetail", { id }).then(res => {
       console.log(res.detail);
-      this.listItem=res.detail;
-    })
-    console.log(this.$route.params.id,"哈哈");
+      this.listItem = res.detail;
+    });
+    console.log(this.$route.params.id, "哈哈");
   },
-  components: { Left, Head }
+  components: {}
 };
 </script>
 <style>
 .CompanyDetail {
-  height: 100%;
+  width: 50%;
+  padding: 10px;
+  background: white;
+  margin: 10px;
+  border-radius: 10px;
 }
 .CompanyDetail .nav {
   width: 87%;
@@ -70,13 +90,35 @@ export default {
 }
 .main {
   width: 100%;
-  position: absolute;
 }
 .main .title {
-  font-weight: bolder;
   color: #333;
+  margin-bottom: 10px;
+}
+.main p {
+  color: #333;
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: 600;
 }
 #edui1 {
   width: 700px !important;
+}
+.CompanyDetail .edui-default .edui-editor-iframeholder {
+  width: 100%;
+}
+.edui-editor-iframeholder{
+  width:100% !important;
+}
+.CompanyDetail .el-form-item__content{
+  margin-left:0 !important;
+   display:block !important;
+}
+.CompanyDetail .el-input{
+  width:50%;
+}
+.CompanyDetail .el-form-item__label{
+  text-align:left !important;
+  width:100% !important;
 }
 </style>

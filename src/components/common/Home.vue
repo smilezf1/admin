@@ -51,6 +51,9 @@ export default {
 };
 </script>
 <style>
+.content{
+  height:100%;
+}
 .content-box{
   position: absolute;
     left: 250px;

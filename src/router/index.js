@@ -11,20 +11,12 @@ import register from '@/components/register.vue';
 import Header from '@/components/common/Header.vue';//新增
 import slideBar from '@/components/common/slideBar.vue';
 import Home from '@/components/common/Home.vue';
+import tt from '@/components/tt.vue';
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path:"/",
-      component:Home,
-      children:[
-        {
-          path:"tt",
-          component:()=>import ('@/components/tt.vue')
-        }
-      ]
-    },{
+  {
     path: '/',
     name: 'register',
     component:register
@@ -48,11 +40,11 @@ export default new Router({
     path:"/Left",
     component:Left
   },
-  {
-    path:"/CompanyDetail",
-    name:"CompanyDetail",
-    component:CompanyDetail
-  },
+  // {
+  //   path:"/CompanyDetail",
+  //   name:"CompanyDetail",
+  //   component:CompanyDetail
+  // },
   {
     path:"/Classify",
     component:Classify
@@ -68,6 +60,30 @@ export default new Router({
   {
     path:"/slideBar",
     component:slideBar
+  },
+  {
+    path:"/Home",
+    component:Home,
+    children:[
+      {
+        path:"/",
+        component:()=>import('@/components/classify.vue')
+      },
+      {
+        path:"tt",
+        component:()=>import ('@/components/tt.vue')
+      },
+      {
+        path:"CompanyDetail",
+        name:"CompanyDetail",
+        component:()=>import('@/components/CompanyDetail.vue')
+      },
+      {
+        path:"Detail",
+        name:"Detail",
+        component:()=>import('@/components/Detail.vue')
+      }
+    ]
   },
 ]
 })
