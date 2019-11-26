@@ -40,11 +40,6 @@ export default new Router({
     path:"/Left",
     component:Left
   },
-  // {
-  //   path:"/CompanyDetail",
-  //   name:"CompanyDetail",
-  //   component:CompanyDetail
-  // },
   {
     path:"/Classify",
     component:Classify

@@ -10,7 +10,7 @@
  })
  export default {
    //get请求
-   get(url, param) {
+   get(url, param){
      return new Promise((callback, reject) => {
        service({
          method: "get",
@@ -35,6 +35,7 @@
      })
    },
    post(url, param) {
+     console.log(url,param);
      return new Promise((callback, reject) => {
        service({
          method: "post",

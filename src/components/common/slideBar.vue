@@ -38,7 +38,7 @@ export default {
       items: [
         {
           icon: "el-icon-collection",
-          index: "Home",
+          index: "/Home",
           title: "公司分类"
         }
       ]
@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     onRoutes() {
-      return this.$route.path.replace("/", "");
+       return this.$route.path.replace("/", "");
     }
   },
   created() {

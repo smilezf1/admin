@@ -26,8 +26,8 @@
               <el-upload
                 class="upload-demo"
                 action="https://www.51gso.com/arvato/app/arvato_shop_api.php?i=194&r=amouse.index.images"
-                :data="{file:classifyImg}"
                 :before-upload="beforeUploadAddClassify"
+                :on-success="addAvatarSuccess"
                 list-type="picture"
                 :limit="1"
                 ref="upload"
@@ -55,6 +55,7 @@
               <el-upload
                 action="https://www.51gso.com/arvato/app/arvato_shop_api.php?i=194&r=amouse.index.images"
                 list-type="picture"
+                :on-success="editAvatarSuccess"
                 :limit="1"
                 ref="upload"
               >
@@ -93,7 +94,7 @@
                 @click="edit(scope.$index, scope.row)"
                 v-model="dialogFormEditVisible"
               >编辑</el-button>
-              <el-button type="info" @click="detail(scope.row.id,scope.row.pcateid)">详情</el-button>
+              <el-button type="info" @click="detail(scope.row.id)">详情</el-button>
               <el-button type="danger" @click="delete1(scope.row.id)">删除</el-button>
             </template>
           </el-table-column>
@@ -115,8 +116,6 @@ export default {
       dialogFormVisible: false,
       dialogFormEditVisible: false,
       searchValue: "",
-      classifyImg:
-        "https://ss0.bdstatic.com/6Ox1bjeh1BF3odCf/it/u=2540772724,3018041659&fm=74&app=80&f=JPEG&size=f121,90?sec=1880279984&t=5187e4ff1bd3bf1c36ce979a042325a8",
       form: {
         name: "",
         img: ""
@@ -128,51 +127,51 @@ export default {
       },
       formLabelWidth: "40px",
       dialogVisible: false,
-      input: ""
+      input: "",
       //上传图片
+      uploadImg: ""
     };
   },
   beforeMount() {
     this.http.get("amouse.index.getFlList").then(res => {
-      console.log(res.list);
       this.listItem = res.list;
     });
-    this.http
-      .get("amouse.index.images", {
-        file: ""
-      })
-      .then(res => {
-        // console.log(res,"图片上传");
-      });
   },
   mounted() {},
   methods: {
     /* 添加分类 */
     addSure() {
-      const _this=this;
+      const _this = this;
       this.dialogFormVisible = false;
-      let form = this.form;
+      let form = _this.form;
       _this.http
         .get("amouse.index.flList", {
           display: "add",
+          display: "add",
           name: form.name,
-          thumb:
-            "https://upload-images.jianshu.io/upload_images/12307919-09fa1ff72f3c27ab.png?imageMogr2/auto-orient/strip|imageView2/2/w/638/format/webp"
+          thumb: form.img
         })
         .then(res => {
           _this.reload();
+          console.log(res);
         })
         .catch(error => {
           console.log(error);
         });
     },
     beforeUploadAddClassify(file) {
-      let fd = new FormData();
-      fd.append("file", file);
-      console.log(fd, file);
-      this.http.post("amouse.index.images", { file: fd }).then(res => {
-        console.log(res);
-      });
+      // let fd = new FormData();
+      // fd.append("file", file);
+      // console.log("哈哈",file);
+    },
+    //上传成功后
+    addAvatarSuccess(response, file) {
+      this.form.img = response.path;
+    },
+    /* 编辑 */
+    editAvatarSuccess(response) {
+      console.log(response.path);
+      this.EDitForm.img = response.path;
     },
     /* 分类搜索 */
     classifySearch(value) {
@@ -186,7 +185,6 @@ export default {
             search: value
           })
           .then(res => {
-            console.log(res);
             if (!res.message) {
               _this.listItem = res.list;
             } else {
@@ -200,13 +198,20 @@ export default {
       this.dialogFormVisible = false;
     },
     editSure() {
-      const _this=this;
+      const _this = this;
       this.dialogFormEditVisible = false;
-         console.log(this.EDitForm);
-      _this.http.get("amouse.index.flList",{display:"updata",id:this.EDitForm.id,name:_this.EDitForm.name,thumb:_this.EDitForm.thumb}).then(res=>{
-        console.log(res);
-      _this.reload();
-      })
+      console.log(this.EDitForm);
+      _this.http
+        .get("amouse.index.flList", {
+          display: "updata",
+          id: this.EDitForm.id,
+          name: _this.EDitForm.name,
+          thumb: _this.EDitForm.img
+        })
+        .then(res => {
+          console.log(res);
+          _this.reload();
+        });
     },
     editCancel() {
       this.dialogFormEditVisible = false;
@@ -217,7 +222,7 @@ export default {
       this.dialogFormEditVisible = true;
     },
     detail(id, pcateid) {
-      this.$router.push({ name: "Detail", params: { id } });
+      this.$router.push({ name: "Detail", params: { id, pcateid } });
     },
     companyDetail() {
       this.$router.push({ path: "Login", params: { id } });
@@ -226,7 +231,6 @@ export default {
 
     //删除
     delete1(id) {
-      console.log(id);
       const _this = this;
       this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
         confirmButtonText: "确定",
@@ -237,7 +241,7 @@ export default {
           _this.http
             .get("amouse.index.flList", { display: "slice", id: [id] })
             .then(res => {
-              console.log(res, "执行了嘛");
+              
               _this.reload();
             });
           this.$message({
@@ -246,7 +250,7 @@ export default {
           });
         })
         .catch(err => {
-          console.log(err);
+        
           this.$message({
             type: "info",
             message: "已取消删除"
