@@ -11,24 +11,26 @@
         </el-form-item>
         <!-- images -->
         <el-form-item label="图片" :label-width="formLabelWidth">
-          <img :src="listItem.images" style="height:80px">
+          <img :src="listItem.images" style="height:80px" />
           <el-upload
             action="https://www.51gso.com/arvato/app/arvato_shop_api.php?i=194&r=amouse.index.images"
             list-type="picture"
             :limit="1"
             :on-success="addAvatarSuccess"
+            :on-remove="handelRemove"
             ref="upload"
           >
             <el-button size="small" type="primary" style="margin-bottom:10px">点击上传</el-button>
           </el-upload>
           <!-- <el-button @click="Carousel()">轮播图</el-button>
-          <el-button>下方显示图</el-button> -->
-          <el-radio v-model="listItem.isbanner" label="1" >轮播图</el-radio>
+          <el-button>下方显示图</el-button>-->
+          <el-radio v-model="listItem.isbanner" label="1">轮播图</el-radio>
           <el-radio v-model="listItem.isbanner" label="2">下方显示图</el-radio>
+          <el-radio v-model="listItem.isbanner" label="0">不显示</el-radio>
         </el-form-item>
         <!-- picture -->
         <el-form-item label="大图" :label-width="formLabelWidth">
-          <img :src="listItem.picture" style="height:80px;">
+          <img :src="listItem.picture" style="height:80px;" />
           <el-upload
             action="https://www.51gso.com/arvato/app/arvato_shop_api.php?i=194&r=amouse.index.images"
             list-type="picture"
@@ -64,26 +66,25 @@ export default {
       },
       listItem: {},
       form: [],
-      formLabelWidth: "40px",
-      radio:"0"
+      formLabelWidth: "40px"
     };
   },
   mounted() {
     let id = this.$route.params.id;
     this.http.get("amouse.index.getDetail", { id }).then(res => {
       this.listItem = res.detail;
-       console.log(this.listItem);
     });
   },
   methods: {
     submit(value) {
       const _this = this;
-      console.log(value);
+      console.log(value.isbanner);
       _this.http
         .get("amouse.index.contactsList", {
           display: "updata",
           id: value.id,
           pcateid: value.pcateid,
+          isbanner: value.isbanner,
           info: value.info,
           title: value.title,
           images: value.images,
@@ -93,18 +94,20 @@ export default {
         })
         .then(res => {
           _this.reload();
-          _this.$router.push({ name: "Detail" });
         });
     },
     /* 上传的是轮播图还是下方显示图  图片上传*/
     addAvatarSuccess(response) {
       console.log(response.path);
-      this.listItem.images=response.path
+      this.listItem.images = response.path;
     },
     /* 大图上传 */
     addBigAvatarSuccess(response) {
-      this.listItem.picture=response.path
+      this.listItem.picture = response.path;
       console.log(response.path);
+    },
+    handelRemove(response) {
+      console.log(response);
     }
   },
   components: {}

@@ -24,6 +24,7 @@
             </el-upload>
             <el-radio label="1" v-model="form.isbanner">轮播图</el-radio>
             <el-radio label="2" v-model="form.isbanner">下方显示图</el-radio>
+             <el-radio label="0" v-model="form.isbanner">不显示</el-radio>
           </el-form-item>
           <el-form-item label="大图" :label-width="formLabelWidth">
             <img :src="form.picture" width="60" />
@@ -82,7 +83,7 @@ export default {
         title: "",
         info: "",
         images: "",
-        isbanner: 0,
+        isbanner:"",
         picture: "",
         mobile: "",
         place: ""
@@ -132,16 +133,18 @@ export default {
     //编辑
     edit(index, row) {
       const _this = this;
-      _this.$router.push({ name: "CompanyDetail", params: { id: row.id } });
+      _this.$router.push({ name:"CompanyDetail", params: { id: row.id } });
     },
     submit(value) {
       const _this = this;
       let id = this.$route.params.id||23;
       this.dialogFormVisible = false;
+      console.log(id);
       _this.http
         .get("amouse.index.contactsList", {
           display:"add",
           pcateid: id,
+          isbanner:value.isbanner,
           info: value.info,
           title: value.title,
           images: value.images,
@@ -151,6 +154,7 @@ export default {
         })
         .then(res => {
           _this.reload();
+           _this.$router.push({path:"/Home"});
           console.log(res, _this.listItem);
         });
     },
